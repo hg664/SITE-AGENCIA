@@ -1,13 +1,1267 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>conceitos-react-3c</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Higor Viagens | Sua próxima memória inesquecível</title>
+    <!-- SEO -->
+    <meta name="description" content="A Higor Viagens é a sua agência de viagens de confiança. Pacotes nacionais, cruzeiros e promoções exclusivas. Realizamos seu sonho, não importa onde você esteja no Brasil.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* CSS reset & variables */
+        :root {
+            --ocean-blue: #004b6b;
+            --ocean-blue-light: #006b99;
+            --ocean-blue-dark: #002b40;
+            --soft-gold: #d4af37;
+            --soft-gold-light: #f2cf6b;
+            --soft-gold-dark: #b38f24;
+            --text-dark: #2d3748;
+            --text-light: #4a5568;
+            --bg-light: #f8fafc;
+            --white: #ffffff;
+            
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Outfit', sans-serif;
+            
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background-color: var(--soft-gold);
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--soft-gold-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--ocean-blue);
+            border: 2px solid var(--ocean-blue);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--ocean-blue);
+            color: var(--white);
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 0;
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+            padding: 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 100%;
+            padding: 0 max(10px, 1%);
+        }
+
+        .logo-link {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-img {
+            height: 200px;
+            width: auto;
+            margin-top: -30px;
+            transition: var(--transition);
+        }
+
+        header.scrolled .logo-img {
+            height: 90px;
+            margin-top: -10px;
+        }
+
+        /* 1. Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            color: var(--white);
+            text-align: center;
+            overflow: hidden;
+            z-index: 1;
+            background: linear-gradient(135deg, var(--ocean-blue-dark), var(--ocean-blue));
+        }
+
+        .hero-bg-slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .hero-bg-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+        }
+
+        .hero-bg-slide::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(0, 43, 64, 0.6), rgba(0, 43, 64, 0.6));
+        }
+
+        .hero-bg-slide.active {
+            opacity: 1;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1s forwards 0.5s;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            color: var(--soft-gold-light);
+        }
+
+        .hero h1 {
+            font-family: var(--font-heading);
+            font-size: 4.5rem;
+            line-height: 1.1;
+            margin-bottom: 30px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            font-weight: 300;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-inline: auto;
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Sections General */
+        section {
+            padding: 100px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .section-header.visible {
+            animation: fadeUp 0.8s forwards;
+        }
+
+        .section-subtitle {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--soft-gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: 2.8rem;
+            color: var(--ocean-blue-dark);
+        }
+
+        /* 2. Serviços */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .service-card.visible {
+            animation: fadeUp 0.8s forwards;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            border-bottom: 4px solid var(--soft-gold);
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background-color: rgba(212, 175, 55, 0.1);
+            color: var(--soft-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin: 0 auto 25px;
+            transition: var(--transition);
+        }
+
+        .service-card:hover .service-icon {
+            background-color: var(--soft-gold);
+            color: var(--white);
+        }
+
+        .service-card h3 {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            color: var(--ocean-blue-dark);
+            margin-bottom: 15px;
+        }
+
+        .service-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* 3. Por que escolher */
+        .why-choose {
+            background-color: var(--ocean-blue-dark);
+            color: var(--white);
+        }
+
+        .why-choose .section-title {
+            color: var(--white);
+        }
+
+        .features-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+
+        .feature-item.visible {
+            animation: slideRight 0.8s forwards;
+        }
+
+        @keyframes slideRight {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            color: var(--soft-gold);
+            flex-shrink: 0;
+        }
+
+        .feature-content h3 {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .feature-content p {
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 300;
+        }
+
+        /* 4. Depoimentos */
+        .testimonials {
+            background-color: var(--bg-light);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+            position: relative;
+            opacity: 0;
+            transform: scale(0.9);
+        }
+
+        .testimonial-card.visible {
+            animation: popIn 0.6s forwards;
+        }
+
+        @keyframes popIn {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .quote-icon {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            font-size: 3rem;
+            color: rgba(212, 175, 55, 0.1);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: var(--text-light);
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .client-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .client-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .client-details h4 {
+            font-family: var(--font-heading);
+            color: var(--ocean-blue-dark);
+        }
+
+        .client-details p {
+            font-size: 0.85rem;
+            color: var(--soft-gold);
+            font-weight: 500;
+        }
+
+        /* 5. Destinos */
+        .destinations-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        @media(min-width: 992px) {
+            .destinations-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .destination-card {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            height: 350px;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .destination-card.visible {
+            animation: fadeUp 0.8s forwards;
+        }
+
+        .destination-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .destination-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .destination-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,43,64,0.9) 0%, rgba(0,43,64,0) 60%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 30px;
+        }
+
+        .destination-overlay h3 {
+            color: var(--white);
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            transform: translateY(20px);
+            transition: var(--transition);
+        }
+
+        .destination-btn {
+            color: var(--soft-gold);
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: var(--transition);
+        }
+
+        .destination-card:hover .destination-overlay h3 {
+            transform: translateY(0);
+        }
+
+        .destination-card:hover .destination-btn {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.1s;
+        }
+
+        /* 6. Confiança */
+        .trust-banner {
+            background-image: linear-gradient(rgba(0, 75, 107, 0.9), rgba(0, 75, 107, 0.9)), url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding: 80px 0;
+            color: var(--white);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-item {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+
+        .stat-item.visible {
+            animation: popIn 0.8s forwards;
+        }
+
+        .stat-number {
+            font-family: var(--font-heading);
+            font-size: 4rem;
+            color: var(--soft-gold);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .trust-point-title {
+            font-size: clamp(1.7rem, 3vw, 2.6rem);
+            line-height: 1.15;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* 7. Contato */
+        .contact {
+            background-color: var(--bg-light);
+        }
+
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .contact-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .contact-content h2 {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            color: var(--ocean-blue-dark);
+            margin-bottom: 20px;
+        }
+
+        .contact-content p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+            background: var(--white);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.05);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            color: var(--text-dark);
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--ocean-blue);
+            box-shadow: 0 0 0 3px rgba(0, 75, 107, 0.1);
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background-color: var(--ocean-blue);
+            color: var(--white);
+            border: none;
+            padding: 16px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            font-family: var(--font-body);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--ocean-blue-dark);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--ocean-blue-dark);
+            color: rgba(255, 255, 255, 0.7);
+            padding: 40px 0 20px;
+            text-align: center;
+        }
+
+        .footer-logo-img {
+            height: 260px;
+            width: auto;
+            display: block;
+            margin: 0 auto 20px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--soft-gold);
+            transform: translateY(-3px);
+        }
+
+        /* Promo & Real Photo Banners */
+        .disney-promo-banner, .real-group-banner {
+            margin-top: 60px;
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.04);
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            align-items: center;
+            border: 1px solid rgba(0,0,0,0.03);
+            transition: var(--transition);
+        }
+
+        .disney-promo-banner:hover, .real-group-banner:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 45px rgba(0,0,0,0.08);
+        }
+
+        .disney-promo-img-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: var(--white);
+            height: 100%;
+        }
+
+        .disney-promo-img-container img {
+            width: 100%;
+            height: auto;
+            max-height: 550px;
+            object-fit: contain;
+            display: block;
+            border-radius: 20px;
+        }
+
+        .real-group-img-container {
+            height: 450px;
+            overflow: hidden;
+        }
+
+        .real-group-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .real-group-banner:hover .real-group-img-container img {
+            transform: scale(1.03);
+        }
+
+        .disney-promo-content, .real-group-content {
+            padding: 30px;
+        }
+
+        @media(min-width: 992px) {
+            .disney-promo-banner {
+                grid-template-columns: 1fr 1.2fr;
+            }
+            .real-group-banner {
+                grid-template-columns: 1.2fr 1fr;
+            }
+            .disney-promo-content, .real-group-content {
+                padding: 50px;
+            }
+        }
+
+        @media(max-width: 768px) {
+            .disney-promo-banner, .real-group-banner {
+                margin-top: 40px;
+            }
+            .real-group-img-container {
+                height: 250px;
+            }
+            .disney-promo-content, .real-group-content {
+                padding: 25px;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            .section-title {
+                font-size: 2.2rem;
+            }
+            .contact-container {
+                flex-direction: column;
+            }
+            .stat-number {
+                font-size: 3rem;
+            }
+            .destinations-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="container nav-container">
+            <a href="#home" class="logo-link"><img src="logo.png" alt="Higor Viagens" class="logo-img"></a>
+            <a href="https://wa.me/556892088000" target="_blank" class="btn btn-primary" style="padding: 10px 24px; font-size: 0.9rem;">
+                <i class="fab fa-whatsapp"></i> Fale Conosco
+            </a>
+        </div>
+    </header>
+
+    <!-- 1. Hero -->
+    <section class="hero" id="home">
+        <div class="hero-bg-slider" id="heroSlider"></div>
+        <div class="hero-content">
+            <span class="hero-subtitle">Descubra novos horizontes</span>
+            <h1>Sua próxima memória inesquecível começa aqui.</h1>
+            <p>Mais do que viagens, entregamos experiências transformadoras. Realize o sonho da viagem perfeita com segurança e tranquilidade, não importa de qual lugar do Brasil você esteja.</p>
+            <a href="https://wa.me/556892088000" target="_blank" class="btn btn-primary">
+                <i class="fab fa-whatsapp"></i> Falar com um especialista
+            </a>
+        </div>
+    </section>
+
+    <!-- 2. Serviços -->
+    <section id="servicos">
+        <div class="container">
+            <div class="section-header js-scroll">
+                <span class="section-subtitle">Nossos Serviços</span>
+                <h2 class="section-title">O que preparamos para você</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-card js-scroll">
+                    <div class="service-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3>Pacotes Nacionais</h3>
+                    <p>Do Nordeste ao Sul, explore as maravilhas do Brasil com roteiros completos.</p>
+                </div>
+                <div class="service-card js-scroll" style="animation-delay: 0.2s;">
+                    <div class="service-icon">
+                        <i class="fas fa-ship"></i>
+                    </div>
+                    <h3>Cruzeiros</h3>
+                    <p>Vivencie o luxo e a comodidade dos melhores cruzeiros pelo litoral e mundo afora.</p>
+                </div>
+                <div class="service-card js-scroll" style="animation-delay: 0.4s;">
+                    <div class="service-icon">
+                        <i class="fas fa-tag"></i>
+                    </div>
+                    <h3>Promoções Exclusivas</h3>
+                    <p>Condições imperdíveis negociadas diretamente para o seu bolso.</p>
+                </div>
+                <div class="service-card js-scroll" style="animation-delay: 0.6s;">
+                    <div class="service-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Viagens em Grupo</h3>
+                    <p>Experiências compartilhadas incríveis, com acompanhamento e diversão garantida.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Por que escolher -->
+    <section class="why-choose" id="diferenciais">
+        <div class="container">
+            <div class="contact-container">
+                <div class="contact-content js-scroll">
+                    <span class="section-subtitle">Nossos Diferenciais</span>
+                    <h2 class="section-title">Por que viajar com a Higor Viagens?</h2>
+                    <p style="color: rgba(255,255,255,0.8); margin-top: 20px;">Nossa missão é garantir que você não tenha preocupações, apenas aproveite cada momento da sua viagem. Veja como fazemos isso acontecer.</p>
+                </div>
+                <div class="features-wrapper">
+                    <div class="feature-item js-scroll">
+                        <div class="feature-icon"><i class="fas fa-gem"></i></div>
+                        <div class="feature-content">
+                            <h3>Atendimento Personalizado</h3>
+                            <p>Entendemos o seu perfil e desenhamos a viagem exata para os seus sonhos e necessidades.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item js-scroll" style="animation-delay: 0.2s;">
+                        <div class="feature-icon"><i class="fas fa-headset"></i></div>
+                        <div class="feature-content">
+                            <h3>Suporte Completo 24/7</h3>
+                            <p>Durante toda a sua viagem, estamos a uma mensagem de distância para resolver qualquer imprevisto.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item js-scroll" style="animation-delay: 0.4s;">
+                        <div class="feature-icon"><i class="fas fa-handshake"></i></div>
+                        <div class="feature-content">
+                            <h3>Melhores Preços Negociados</h3>
+                            <p>Trabalhamos diretamente com os melhores fornecedores para garantir vantagens exclusivas para você.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Destinos -->
+    <section id="destinos">
+        <div class="container">
+            <div class="section-header js-scroll">
+                <span class="section-subtitle">Inspirações</span>
+                <h2 class="section-title">Destinos em Destaque</h2>
+            </div>
+            <div class="destinations-grid">
+                <div class="destination-card js-scroll">
+                    <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Dubai">
+                    <div class="destination-overlay">
+                        <h3>Dubai</h3>
+                        <a href="https://wa.me/556892088000" target="_blank" class="destination-btn">Ver pacotes <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="destination-card js-scroll" style="animation-delay: 0.1s;">
+                    <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Paris">
+                    <div class="destination-overlay">
+                        <h3>Paris</h3>
+                        <a href="https://wa.me/556892088000" target="_blank" class="destination-btn">Ver pacotes <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="destination-card js-scroll" style="animation-delay: 0.2s;">
+                    <img src="https://images.unsplash.com/photo-1544644181-1484b3fdfc62?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Maldivas">
+                    <div class="destination-overlay">
+                        <h3>Maldivas</h3>
+                        <a href="https://wa.me/556892088000" target="_blank" class="destination-btn">Ver pacotes <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="destination-card js-scroll" style="animation-delay: 0.3s;">
+                    <img src="https://images.unsplash.com/photo-1483729558449-99ef09a8c325?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Rio de Janeiro">
+                    <div class="destination-overlay">
+                        <h3>Rio de Janeiro</h3>
+                        <a href="https://wa.me/556892088000" target="_blank" class="destination-btn">Ver pacotes <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="destination-card js-scroll" style="animation-delay: 0.4s;">
+                    <img src="https://images.unsplash.com/photo-1533050487297-09b450131914?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Grécia">
+                    <div class="destination-overlay">
+                        <h3>Grécia</h3>
+                        <a href="https://wa.me/556892088000" target="_blank" class="destination-btn">Ver pacotes <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="destination-card js-scroll" style="animation-delay: 0.5s;">
+                    <img src="https://images.unsplash.com/photo-1518182170546-076616fdcd80?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Maceió">
+                    <div class="destination-overlay">
+                        <h3>Maceió</h3>
+                        <a href="https://wa.me/556892088000" target="_blank" class="destination-btn">Ver pacotes <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Banner Disney em Destaque -->
+            <div class="disney-promo-banner js-scroll">
+                <div class="disney-promo-img-container">
+                    <img src="disney.png" alt="Ingressos Disney Higor Viagens">
+                </div>
+                <div class="disney-promo-content">
+                    <span style="color: var(--soft-gold); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; display: block; margin-bottom: 10px;">Magia Garantida</span>
+                    <h3 style="font-family: var(--font-heading); font-size: 2.2rem; color: var(--ocean-blue-dark); margin-bottom: 20px; line-height: 1.2;">Realize o Sonho de ir para a Disney</h3>
+                    <p style="color: var(--text-light); margin-bottom: 25px; font-size: 1.05rem; line-height: 1.6;">Somos especialistas em realizar sonhos mágicos. Além de pacotes completos de viagem, hospedagem e passagens aéreas, oferecemos <strong>ingressos oficiais para as principais atrações e parques de Orlando</strong> com atendimento personalizado e vantagens exclusivas. Também trabalhamos com assessoria completa para emissão do seu Visto para turismo.</p>
+                    
+                    <div class="disney-stores" style="margin-bottom: 30px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                        <div style="background: var(--bg-light); padding: 15px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.05);">
+                            <h4 style="color: var(--ocean-blue-dark); margin-bottom: 5px; font-size: 0.95rem; font-family: var(--font-body); font-weight: 600;"><i class="fas fa-store" style="color: var(--soft-gold); margin-right: 5px;"></i> Loja Via Verde Shopping</h4>
+                            <p style="margin: 0; font-size: 0.9rem; color: var(--text-light); font-weight: 500;">(68) 3225-0285</p>
+                        </div>
+                        <div style="background: var(--bg-light); padding: 15px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.05);">
+                            <h4 style="color: var(--ocean-blue-dark); margin-bottom: 5px; font-size: 0.95rem; font-family: var(--font-body); font-weight: 600;"><i class="fas fa-store" style="color: var(--soft-gold); margin-right: 5px;"></i> Loja Centro</h4>
+                            <p style="margin: 0; font-size: 0.9rem; color: var(--text-light); font-weight: 500;">(68) 3227-6933</p>
+                        </div>
+                    </div>
+
+                    <a href="https://wa.me/556892088000?text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20ingressos%20e%20pacotes%20para%20a%20Disney!" target="_blank" class="btn btn-primary">
+                        <i class="fab fa-whatsapp"></i> Falar com Especialista em Disney
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Confiança -->
+    <section class="trust-banner">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item js-scroll">
+                    <div class="stat-number trust-point-title">Atendimento online</div>
+                    <div class="stat-label">Para todo o Brasil</div>
+                </div>
+                <div class="stat-item js-scroll" style="animation-delay: 0.2s;">
+                    <div class="stat-number trust-point-title">Roteiros sob medida</div>
+                    <div class="stat-label">Do orçamento ao embarque</div>
+                </div>
+                <div class="stat-item js-scroll" style="animation-delay: 0.4s;">
+                    <div class="stat-number trust-point-title">Suporte completo</div>
+                    <div class="stat-label">Durante toda a viagem</div>
+                </div>
+                <div class="stat-item js-scroll" style="animation-delay: 0.6s;">
+                    <div class="stat-number trust-point-title">Compra segura</div>
+                    <div class="stat-label">Com orientação especializada</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Depoimentos -->
+    <section class="testimonials" id="depoimentos">
+        <div class="container">
+            <div class="section-header js-scroll">
+                <span class="section-subtitle">Histórias Reais</span>
+                <h2 class="section-title">O que dizem nossos viajantes</h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card js-scroll">
+                    <i class="fas fa-quote-right quote-icon"></i>
+                    <p class="testimonial-text">"Nunca tinha comprado pacote de viagem pela internet, sempre tive receio. Mas a equipe da Higor Viagens me passou tanta confiança! Fizeram tudo por mim e a viagem para o Nordeste foi perfeita."</p>
+                    <div class="client-info">
+                        <img src="https://ui-avatars.com/api/?name=Mariana+Silva&background=004b6b&color=fff&size=100" alt="Mariana" class="client-img">
+                        <div class="client-details">
+                            <h4>Mariana Silva</h4>
+                            <p>Belo Horizonte, MG</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card js-scroll" style="animation-delay: 0.2s;">
+                    <i class="fas fa-quote-right quote-icon"></i>
+                    <p class="testimonial-text">"Nosso cruzeiro foi inesquecível. O suporte que recebemos durante o processo inteiro, até estarmos dentro do navio, foi excepcional. Indico de olhos fechados."</p>
+                    <div class="client-info">
+                        <img src="https://ui-avatars.com/api/?name=Carlos+Eduardo&background=d4af37&color=fff&size=100" alt="Carlos" class="client-img">
+                        <div class="client-details">
+                            <h4>Carlos Eduardo</h4>
+                            <p>Curitiba, PR</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card js-scroll" style="animation-delay: 0.4s;">
+                    <i class="fas fa-quote-right quote-icon"></i>
+                    <p class="testimonial-text">"Mesmo morando em outro estado, parecia que a agência era na minha rua de tanto contato e cuidado que tiveram conosco. A viagem em família para a Disney superou expectativas!"</p>
+                    <div class="client-info">
+                        <img src="https://ui-avatars.com/api/?name=Ana+Paula&background=004b6b&color=fff&size=100" alt="Ana Paula" class="client-img">
+                        <div class="client-details">
+                            <h4>Ana Paula</h4>
+                            <p>Brasília, DF</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Imagem do Grupo Real -->
+            <div class="real-group-banner js-scroll">
+                <div class="real-group-img-container">
+                    <img src="grupo.jpg" alt="Grupo de Clientes Higor Viagens">
+                </div>
+                <div class="real-group-content">
+                    <span style="color: var(--soft-gold); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; display: block; margin-bottom: 10px;">Momentos Inesquecíveis</span>
+                    <h3 style="font-family: var(--font-heading); font-size: 2rem; color: var(--ocean-blue-dark); margin-bottom: 20px; line-height: 1.2;">Nossas Viagens em Grupo</h3>
+                    <p style="color: var(--text-light); margin-bottom: 30px; font-size: 1.05rem; line-height: 1.6;">Registros de sorrisos e amizades reais construídas em nossos roteiros. Na Higor Viagens, cada viagem em grupo é desenhada para unir pessoas e criar laços eternos, sempre com o acompanhamento de guias experientes e total segurança para que você só se preocupe em curtir a viagem.</p>
+                    <a href="https://wa.me/556892088000?text=Olá,%20vi%20a%20foto%20dos%20grupos%20no%20site%20e%20gostaria%20de%20saber%20mais%20sobre%20as%20próximas%20viagens%20em%20grupo!" target="_blank" class="btn btn-primary">
+                        <i class="fab fa-whatsapp"></i> Quero fazer parte do próximo grupo
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Contato -->
+    <section class="contact" id="contato" style="background-color: var(--white);">
+        <div class="container">
+            <div class="section-header js-scroll" style="margin-bottom: 50px;">
+                <span class="section-subtitle">Atendimento</span>
+                <h2 class="section-title" style="font-size: 2.8rem; margin-bottom: 15px;">Vamos planejar sua próxima aventura?</h2>
+                <p style="font-size: 1.1rem; color: var(--text-light); max-width: 700px; margin: 0 auto;">Não importa em qual estado do Brasil você esteja, nosso time está online e pronto para desenhar a sua viagem dos sonhos com total segurança.</p>
+            </div>
+            
+            <div class="contact-container" style="align-items: flex-start;">
+                <div class="contact-content js-scroll">
+                    <img src="atendimento.png" alt="Equipe pronta para atender você" style="width: 100%; max-width: 450px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.06); margin-bottom: 30px; border: 2px solid rgba(212, 175, 55, 0.15); display: block;">
+                    
+                    <div style="display: flex; flex-direction: column; gap: 20px;">
+                        <div style="display: flex; align-items: center; gap: 15px; background: var(--bg-light); padding: 15px; border-radius: 12px; max-width: 450px;">
+                            <div style="width: 50px; height: 50px; background: rgba(0,75,107,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--ocean-blue); font-size: 1.5rem; flex-shrink: 0;">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <div>
+                                <h4 style="font-family: var(--font-heading); color: var(--ocean-blue-dark); margin: 0;">WhatsApp</h4>
+                                <p style="margin:0; font-size: 1rem; font-weight: 500;">+55 68 9208-8000</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 15px; background: var(--bg-light); padding: 15px; border-radius: 12px; max-width: 450px;">
+                            <div style="width: 50px; height: 50px; background: rgba(0,75,107,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--ocean-blue); font-size: 1.5rem; flex-shrink: 0;">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <div>
+                                <h4 style="font-family: var(--font-heading); color: var(--ocean-blue-dark); margin: 0;">Site</h4>
+                                <p style="margin:0; font-size: 1rem; font-weight: 500;"><a href="https://higorpassagens.com.br/" target="_blank">higorpassagens.com.br</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form js-scroll" style="animation-delay: 0.2s;">
+                    <form id="whatsappForm">
+                        <div class="form-group">
+                            <input type="text" id="nome" class="form-control" placeholder="Seu nome completo" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="cidade" class="form-control" placeholder="Sua cidade / Estado" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="destino" class="form-control" placeholder="Destino dos sonhos" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="mensagem" class="form-control" placeholder="Como podemos te ajudar?" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">
+                            Enviar Mensagem <i class="fab fa-whatsapp"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <img src="logo.png" alt="Higor Viagens" class="footer-logo-img">
+            <div class="social-links">
+                <a href="https://www.instagram.com/higorviagens" target="_blank" aria-label="Instagram da Higor Viagens"><i class="fab fa-instagram"></i></a>
+                <a href="https://higorpassagens.com.br/" target="_blank" aria-label="Site da Higor Viagens"><i class="fas fa-globe"></i></a>
+                <a href="https://wa.me/556892088000" target="_blank" aria-label="WhatsApp da Higor Viagens"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <p>&copy; 2024 Higor Viagens. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Header Scroll Effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll Animations using Intersection Observer
+        const scrollElements = document.querySelectorAll('.js-scroll');
+        
+        const elementInView = (el, dividend = 1) => {
+            const elementTop = el.getBoundingClientRect().top;
+            return (elementTop <= (window.innerHeight || document.documentElement.clientHeight) / dividend);
+        };
+
+        const displayScrollElement = (element) => {
+            element.classList.add('visible');
+        };
+
+        const handleScrollAnimation = () => {
+            scrollElements.forEach((el) => {
+                if (elementInView(el, 1.1)) {
+                    displayScrollElement(el);
+                    
+                    // Se for os contadores, inicia a animação
+                    if(el.classList.contains('stat-item') && !el.classList.contains('counted')) {
+                        const numberEl = el.querySelector('.stat-number');
+                        if(numberEl && numberEl.dataset.target) {
+                            animateValue(numberEl, 0, parseInt(numberEl.getAttribute('data-target')), 2000);
+                        }
+                        el.classList.add('counted');
+                    }
+                }
+            });
+        }
+
+        // Animação de números (Trust Banner)
+        function animateValue(obj, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                let currentVal = Math.floor(progress * (end - start) + start);
+                
+                // Formatação para números grandes (ex: 5000 -> 5.000+)
+                if(end >= 1000) {
+                    obj.innerHTML = currentVal.toLocaleString('pt-BR') + '+';
+                } else if(end === 98) {
+                    obj.innerHTML = currentVal + '%';
+                } else {
+                    obj.innerHTML = currentVal;
+                }
+                
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        window.addEventListener('scroll', () => {
+            handleScrollAnimation();
+        });
+        
+        // Trigger initial check
+        handleScrollAnimation();
+
+        // Form to WhatsApp Integration
+        document.getElementById('whatsappForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nome = document.getElementById('nome').value;
+            const cidade = document.getElementById('cidade').value;
+            const destino = document.getElementById('destino').value;
+            const mensagem = document.getElementById('mensagem').value;
+            
+            const textoWhatsApp = `Olá! Meu nome é *${nome}*, falo de *${cidade}*.\n\nTenho interesse no destino: *${destino}*.\n\n${mensagem}`;
+            
+            const numeroTelefone = '556892088000';
+            const url = `https://wa.me/${numeroTelefone}?text=${encodeURIComponent(textoWhatsApp)}`;
+            
+            window.open(url, '_blank');
+        });
+
+        // Hero Background Slider
+        const heroImages = [
+            'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80', // Barco / Lago
+            'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80', // Paris
+            'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80', // Dubai
+            'https://images.unsplash.com/photo-1544644181-1484b3fdfc62?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80', // Maldivas
+            'https://images.unsplash.com/photo-1522083165195-3424ed129620?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80', // Roma
+            'https://images.unsplash.com/photo-1533050487297-09b450131914?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'  // Grécia
+        ];
+
+        const heroSlider = document.getElementById('heroSlider');
+        let currentSlideIndex = 0;
+
+        heroImages.forEach((imgSrc, index) => {
+            const slide = document.createElement('div');
+            slide.classList.add('hero-bg-slide');
+            if (index === 0) slide.classList.add('active');
+            slide.style.backgroundImage = `url('${imgSrc}')`;
+            heroSlider.appendChild(slide);
+        });
+
+        const slides = document.querySelectorAll('.hero-bg-slide');
+
+        setInterval(() => {
+            slides[currentSlideIndex].classList.remove('active');
+            currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+            slides[currentSlideIndex].classList.add('active');
+        }, 5000);
+    </script>
+</body>
 </html>
