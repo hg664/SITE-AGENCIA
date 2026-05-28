@@ -13,801 +13,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <style>
-        /* CSS reset & variables */
-        :root {
-            --ocean-blue: #004b6b;
-            --ocean-blue-light: #006b99;
-            --ocean-blue-dark: #002b40;
-            --soft-gold: #d4af37;
-            --soft-gold-light: #f2cf6b;
-            --soft-gold-dark: #b38f24;
-            --text-dark: #2d3748;
-            --text-light: #4a5568;
-            --bg-light: #f8fafc;
-            --white: #ffffff;
-            
-            --font-heading: 'Playfair Display', serif;
-            --font-body: 'Outfit', sans-serif;
-            
-            --transition: all 0.3s ease;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: var(--font-body);
-            color: var(--text-dark);
-            background-color: var(--bg-light);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Buttons */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 14px 32px;
-            border-radius: 50px;
-            font-family: var(--font-body);
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: var(--transition);
-            border: none;
-            gap: 10px;
-        }
-
-        .btn-primary {
-            background-color: var(--soft-gold);
-            color: var(--white);
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
-        }
-
-        .btn-primary:hover {
-            background-color: var(--soft-gold-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
-        }
-
-        .btn-secondary {
-            background-color: transparent;
-            color: var(--ocean-blue);
-            border: 2px solid var(--ocean-blue);
-        }
-
-        .btn-secondary:hover {
-            background-color: var(--ocean-blue);
-            color: var(--white);
-        }
-
-        /* Header */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: 0;
-            transition: var(--transition);
-        }
-
-        header.scrolled {
-            background-color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
-            padding: 0;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 100%;
-            padding: 0 max(10px, 1%);
-        }
-
-        .logo-link {
-            display: flex;
-            align-items: center;
-        }
-        
-        .logo-img {
-            height: 200px;
-            width: auto;
-            margin-top: -30px;
-            transition: var(--transition);
-        }
-
-        header.scrolled .logo-img {
-            height: 90px;
-            margin-top: -10px;
-        }
-
-        /* 1. Hero Section */
-        .hero {
-            position: relative;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            color: var(--white);
-            text-align: center;
-            overflow: hidden;
-            z-index: 1;
-            background: linear-gradient(135deg, var(--ocean-blue-dark), var(--ocean-blue));
-        }
-
-        .hero-bg-slider {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
-
-        .hero-bg-slide {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            opacity: 0;
-            transition: opacity 2s ease-in-out;
-        }
-
-        .hero-bg-slide::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: linear-gradient(rgba(0, 43, 64, 0.6), rgba(0, 43, 64, 0.6));
-        }
-
-        .hero-bg-slide.active {
-            opacity: 1;
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeUp 1s forwards 0.5s;
-        }
-
-        .hero-subtitle {
-            font-size: 1.2rem;
-            font-weight: 300;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-            color: var(--soft-gold-light);
-        }
-
-        .hero h1 {
-            font-family: var(--font-heading);
-            font-size: 4.5rem;
-            line-height: 1.1;
-            margin-bottom: 30px;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            font-weight: 300;
-            margin-bottom: 40px;
-            max-width: 600px;
-            margin-inline: auto;
-        }
-
-        @keyframes fadeUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Sections General */
-        section {
-            padding: 100px 0;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        .section-header.visible {
-            animation: fadeUp 0.8s forwards;
-        }
-
-        .section-subtitle {
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--soft-gold);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-            display: block;
-        }
-
-        .section-title {
-            font-family: var(--font-heading);
-            font-size: 2.8rem;
-            color: var(--ocean-blue-dark);
-        }
-
-        /* 2. Serviços */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-
-        .service-card {
-            background: var(--white);
-            padding: 40px 30px;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
-            transition: var(--transition);
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        .service-card.visible {
-            animation: fadeUp 0.8s forwards;
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
-            border-bottom: 4px solid var(--soft-gold);
-        }
-
-        .service-icon {
-            width: 70px;
-            height: 70px;
-            background-color: rgba(212, 175, 55, 0.1);
-            color: var(--soft-gold);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            margin: 0 auto 25px;
-            transition: var(--transition);
-        }
-
-        .service-card:hover .service-icon {
-            background-color: var(--soft-gold);
-            color: var(--white);
-        }
-
-        .service-card h3 {
-            font-family: var(--font-heading);
-            font-size: 1.5rem;
-            color: var(--ocean-blue-dark);
-            margin-bottom: 15px;
-        }
-
-        .service-card p {
-            color: var(--text-light);
-            font-size: 0.95rem;
-        }
-
-        /* 3. Por que escolher */
-        .why-choose {
-            background-color: var(--ocean-blue-dark);
-            color: var(--white);
-        }
-
-        .why-choose .section-title {
-            color: var(--white);
-        }
-
-        .features-wrapper {
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 20px;
-            opacity: 0;
-            transform: translateX(-30px);
-        }
-
-        .feature-item.visible {
-            animation: slideRight 0.8s forwards;
-        }
-
-        @keyframes slideRight {
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .feature-icon {
-            font-size: 2rem;
-            color: var(--soft-gold);
-            flex-shrink: 0;
-        }
-
-        .feature-content h3 {
-            font-family: var(--font-heading);
-            font-size: 1.4rem;
-            margin-bottom: 10px;
-        }
-
-        .feature-content p {
-            color: rgba(255, 255, 255, 0.7);
-            font-weight: 300;
-        }
-
-        /* 4. Depoimentos */
-        .testimonials {
-            background-color: var(--bg-light);
-        }
-
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .testimonial-card {
-            background: var(--white);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
-            position: relative;
-            opacity: 0;
-            transform: scale(0.9);
-        }
-
-        .testimonial-card.visible {
-            animation: popIn 0.6s forwards;
-        }
-
-        @keyframes popIn {
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .quote-icon {
-            position: absolute;
-            top: 30px;
-            right: 30px;
-            font-size: 3rem;
-            color: rgba(212, 175, 55, 0.1);
-        }
-
-        .testimonial-text {
-            font-style: italic;
-            color: var(--text-light);
-            margin-bottom: 30px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .client-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .client-img {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        .client-details h4 {
-            font-family: var(--font-heading);
-            color: var(--ocean-blue-dark);
-        }
-
-        .client-details p {
-            font-size: 0.85rem;
-            color: var(--soft-gold);
-            font-weight: 500;
-        }
-
-        /* 5. Destinos */
-        .destinations-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
-
-        @media(min-width: 992px) {
-            .destinations-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        .destination-card {
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            height: 350px;
-            cursor: pointer;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        .destination-card.visible {
-            animation: fadeUp 0.8s forwards;
-        }
-
-        .destination-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s ease;
-        }
-
-        .destination-card:hover img {
-            transform: scale(1.1);
-        }
-
-        .destination-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(0,43,64,0.9) 0%, rgba(0,43,64,0) 60%);
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 30px;
-        }
-
-        .destination-overlay h3 {
-            color: var(--white);
-            font-family: var(--font-heading);
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-            transform: translateY(20px);
-            transition: var(--transition);
-        }
-
-        .destination-btn {
-            color: var(--soft-gold);
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: var(--transition);
-        }
-
-        .destination-card:hover .destination-overlay h3 {
-            transform: translateY(0);
-        }
-
-        .destination-card:hover .destination-btn {
-            opacity: 1;
-            transform: translateY(0);
-            transition-delay: 0.1s;
-        }
-
-        /* 6. Confiança */
-        .trust-banner {
-            background-image: linear-gradient(rgba(0, 75, 107, 0.9), rgba(0, 75, 107, 0.9)), url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            padding: 80px 0;
-            color: var(--white);
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            text-align: center;
-        }
-
-        .stat-item {
-            opacity: 0;
-            transform: scale(0.8);
-        }
-
-        .stat-item.visible {
-            animation: popIn 0.8s forwards;
-        }
-
-        .stat-number {
-            font-family: var(--font-heading);
-            font-size: 4rem;
-            color: var(--soft-gold);
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-
-        .trust-point-title {
-            font-size: clamp(1.7rem, 3vw, 2.6rem);
-            line-height: 1.15;
-        }
-
-        .stat-label {
-            font-size: 1.1rem;
-            font-weight: 300;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* 7. Contato */
-        .contact {
-            background-color: var(--bg-light);
-        }
-
-        .contact-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 50px;
-            align-items: center;
-        }
-
-        .contact-content {
-            flex: 1;
-            min-width: 300px;
-        }
-
-        .contact-content h2 {
-            font-family: var(--font-heading);
-            font-size: 2.5rem;
-            color: var(--ocean-blue-dark);
-            margin-bottom: 20px;
-        }
-
-        .contact-content p {
-            color: var(--text-light);
-            font-size: 1.1rem;
-            margin-bottom: 30px;
-        }
-
-        .contact-form {
-            flex: 1;
-            min-width: 300px;
-            background: var(--white);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.05);
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 15px 20px;
-            border: 1px solid #e2e8f0;
-            border-radius: 10px;
-            font-family: var(--font-body);
-            font-size: 1rem;
-            color: var(--text-dark);
-            transition: var(--transition);
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: var(--ocean-blue);
-            box-shadow: 0 0 0 3px rgba(0, 75, 107, 0.1);
-        }
-
-        textarea.form-control {
-            min-height: 120px;
-            resize: vertical;
-        }
-
-        .btn-submit {
-            width: 100%;
-            background-color: var(--ocean-blue);
-            color: var(--white);
-            border: none;
-            padding: 16px;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            font-family: var(--font-body);
-            cursor: pointer;
-            transition: var(--transition);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .btn-submit:hover {
-            background-color: var(--ocean-blue-dark);
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--ocean-blue-dark);
-            color: rgba(255, 255, 255, 0.7);
-            padding: 40px 0 20px;
-            text-align: center;
-        }
-
-        .footer-logo-img {
-            height: 260px;
-            width: auto;
-            display: block;
-            margin: 0 auto 20px;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .social-links a {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.1);
-            color: var(--white);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition);
-        }
-
-        .social-links a:hover {
-            background-color: var(--soft-gold);
-            transform: translateY(-3px);
-        }
-
-        /* Promo & Real Photo Banners */
-        .disney-promo-banner, .real-group-banner {
-            margin-top: 60px;
-            background: var(--white);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.04);
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 30px;
-            align-items: center;
-            border: 1px solid rgba(0,0,0,0.03);
-            transition: var(--transition);
-        }
-
-        .disney-promo-banner:hover, .real-group-banner:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 45px rgba(0,0,0,0.08);
-        }
-
-        .disney-promo-img-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: var(--white);
-            height: 100%;
-        }
-
-        .disney-promo-img-container img {
-            width: 100%;
-            height: auto;
-            max-height: 550px;
-            object-fit: contain;
-            display: block;
-            border-radius: 20px;
-        }
-
-        .real-group-img-container {
-            height: 450px;
-            overflow: hidden;
-        }
-
-        .real-group-img-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: var(--transition);
-        }
-
-        .real-group-banner:hover .real-group-img-container img {
-            transform: scale(1.03);
-        }
-
-        .disney-promo-content, .real-group-content {
-            padding: 30px;
-        }
-
-        @media(min-width: 992px) {
-            .disney-promo-banner {
-                grid-template-columns: 1fr 1.2fr;
-            }
-            .real-group-banner {
-                grid-template-columns: 1.2fr 1fr;
-            }
-            .disney-promo-content, .real-group-content {
-                padding: 50px;
-            }
-        }
-
-        @media(max-width: 768px) {
-            .disney-promo-banner, .real-group-banner {
-                margin-top: 40px;
-            }
-            .real-group-img-container {
-                height: 250px;
-            }
-            .disney-promo-content, .real-group-content {
-                padding: 25px;
-            }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 3rem;
-            }
-            .section-title {
-                font-size: 2.2rem;
-            }
-            .contact-container {
-                flex-direction: column;
-            }
-            .stat-number {
-                font-size: 3rem;
-            }
-            .destinations-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -815,9 +21,38 @@
     <header id="header">
         <div class="container nav-container">
             <a href="#home" class="logo-link"><img src="logo.png" alt="Higor Viagens" class="logo-img"></a>
-            <a href="https://wa.me/556892088000" target="_blank" class="btn btn-primary" style="padding: 10px 24px; font-size: 0.9rem;">
-                <i class="fab fa-whatsapp"></i> Fale Conosco
-            </a>
+            <div class="nav-actions">
+                <button class="menu-toggle" id="menuToggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="siteMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <label class="switch" aria-label="Alternar modo escuro">
+                    <input id="themeToggle" class="input" type="checkbox">
+                    <span class="slider">
+                        <span class="sun">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill="#ffd43b" d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12Zm0 4a1 1 0 0 1-1-1v-1a1 1 0 1 1 2 0v1a1 1 0 0 1-1 1Zm0-18a1 1 0 0 1-1-1V2a1 1 0 1 1 2 0v1a1 1 0 0 1-1 1Zm10 8a1 1 0 0 1-1 1h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 1 1ZM4 12a1 1 0 0 1-1 1H2a1 1 0 1 1 0-2h1a1 1 0 0 1 1 1Zm15.07 7.07a1 1 0 0 1-1.42 0l-.7-.7a1 1 0 0 1 1.42-1.42l.7.7a1 1 0 0 1 0 1.42ZM7.05 7.05a1 1 0 0 1-1.42 0l-.7-.7A1 1 0 0 1 6.35 4.93l.7.7a1 1 0 0 1 0 1.42Zm12.02-2.12a1 1 0 0 1 0 1.42l-.7.7a1 1 0 0 1-1.42-1.42l.7-.7a1 1 0 0 1 1.42 0ZM7.05 16.95a1 1 0 0 1 0 1.42l-.7.7a1 1 0 0 1-1.42-1.42l.7-.7a1 1 0 0 1 1.42 0Z"/>
+                            </svg>
+                        </span>
+                        <span class="moon">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M21 14.7A8.5 8.5 0 0 1 9.3 3a9 9 0 1 0 11.7 11.7Z"/>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <a href="https://wa.me/556892088000" target="_blank" class="btn btn-primary" style="padding: 10px 24px; font-size: 0.9rem;">
+                    <i class="fab fa-whatsapp"></i> Fale Conosco
+                </a>
+            </div>
+            <nav class="site-menu" id="siteMenu" aria-label="Menu principal">
+                <a href="#home">Início</a>
+                <a href="#servicos">Serviços</a>
+                <a href="#diferenciais">Diferenciais</a>
+                <a href="#contato">Contato</a>
+                <a href="https://wa.me/556892088000" target="_blank">WhatsApp</a>
+            </nav>
         </div>
     </header>
 
@@ -913,6 +148,9 @@
     <!-- 5. Destinos -->
     <section id="destinos">
         <div class="container">
+            <div class="featured-video-container js-scroll" style="margin-bottom: 60px;">
+                <iframe src="https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=1&mute=1&loop=1&playlist=jfKfPfyJRdk" title="Travel Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
             <div class="section-header js-scroll">
                 <span class="section-subtitle">Inspirações</span>
                 <h2 class="section-title">Destinos em Destaque</h2>
@@ -954,7 +192,7 @@
                     </div>
                 </div>
                 <div class="destination-card js-scroll" style="animation-delay: 0.5s;">
-                    <img src="https://images.unsplash.com/photo-1518182170546-076616fdcd80?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Maceió">
+                    <img src="https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Maceió">
                     <div class="destination-overlay">
                         <h3>Maceió</h3>
                         <a href="https://wa.me/556892088000" target="_blank" class="destination-btn">Ver pacotes <i class="fas fa-arrow-right"></i></a>
@@ -1135,13 +373,26 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <img src="logo.png" alt="Higor Viagens" class="footer-logo-img">
-            <div class="social-links">
-                <a href="https://www.instagram.com/higorviagens" target="_blank" aria-label="Instagram da Higor Viagens"><i class="fab fa-instagram"></i></a>
-                <a href="https://higorpassagens.com.br/" target="_blank" aria-label="Site da Higor Viagens"><i class="fas fa-globe"></i></a>
-                <a href="https://wa.me/556892088000" target="_blank" aria-label="WhatsApp da Higor Viagens"><i class="fab fa-whatsapp"></i></a>
+            <div class="footer-grid">
+                <div class="footer-contact-info">
+                    <img src="logo.png" alt="Higor Viagens" class="footer-logo-img">
+                    <div class="footer-contact-item"><i class="fab fa-whatsapp"></i> +55 68 9208-8000</div>
+                    <div class="footer-contact-item"><i class="fas fa-envelope"></i> contato@higorviagens.com.br</div>
+                    <div class="footer-contact-item"><i class="fas fa-map-marker-alt"></i> Rio Branco, AC</div>
+                </div>
+                <div class="footer-column">
+                    <h4>Links Úteis</h4>
+                    <ul>
+                        <li><a href="#home">Início</a></li>
+                        <li><a href="#servicos">Serviços</a></li>
+                        <li><a href="#diferenciais">Diferenciais</a></li>
+                        <li><a href="#contato">Contato</a></li>
+                    </ul>
+                </div>
             </div>
-            <p>&copy; 2024 Higor Viagens. Todos os direitos reservados.</p>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Higor Viagens. Todos os direitos reservados.</p>
+            </div>
         </div>
     </footer>
 
@@ -1262,6 +513,35 @@
             currentSlideIndex = (currentSlideIndex + 1) % slides.length;
             slides[currentSlideIndex].classList.add('active');
         }, 5000);
+    
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const savedTheme = localStorage.getItem('higor-theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+
+        document.documentElement.dataset.theme = initialTheme;
+        if (themeToggle) {
+            themeToggle.checked = initialTheme === 'dark';
+            themeToggle.addEventListener('change', () => {
+                const nextTheme = themeToggle.checked ? 'dark' : 'light';
+                document.documentElement.dataset.theme = nextTheme;
+                localStorage.setItem('higor-theme', nextTheme);
+            });
+        }
+
+        // Header Menu
+        const menuToggle = document.getElementById('menuToggle');
+        const siteMenu = document.getElementById('siteMenu');
+
+        if(menuToggle && siteMenu) {
+            menuToggle.addEventListener('click', () => {
+                const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+                menuToggle.setAttribute('aria-expanded', !isExpanded);
+                menuToggle.classList.toggle('active');
+                siteMenu.classList.toggle('active');
+            });
+        }
     </script>
 </body>
 </html>
