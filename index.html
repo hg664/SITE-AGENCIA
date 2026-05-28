@@ -13,7 +13,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=4">
 </head>
 <body>
 
@@ -149,7 +149,7 @@
     <section id="destinos">
         <div class="container">
             <div class="featured-video-container js-scroll" style="margin-bottom: 60px;">
-                <iframe src="https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=1&mute=1&loop=1&playlist=jfKfPfyJRdk" title="Travel Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/Xd2xr7zIFyk?autoplay=1&mute=1&loop=1&playlist=Xd2xr7zIFyk&controls=0&modestbranding=1&rel=0&disablekb=1&fs=0&iv_load_policy=3" title="Travel Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" style="pointer-events: none;"></iframe>
             </div>
             <div class="section-header js-scroll">
                 <span class="section-subtitle">Inspirações</span>
@@ -376,17 +376,29 @@
             <div class="footer-grid">
                 <div class="footer-contact-info">
                     <img src="logo.png" alt="Higor Viagens" class="footer-logo-img">
-                    <div class="footer-contact-item"><i class="fab fa-whatsapp"></i> +55 68 9208-8000</div>
-                    <div class="footer-contact-item"><i class="fas fa-envelope"></i> contato@higorviagens.com.br</div>
-                    <div class="footer-contact-item"><i class="fas fa-map-marker-alt"></i> Rio Branco, AC</div>
+                    <div class="footer-contact-item" style="margin-bottom: 15px;"><i class="fas fa-map-marker-alt"></i> R. Mal. Deodoro, Nº 825 - Ipase, Rio Branco - AC</div>
+                    <div class="footer-contact-item" style="margin-bottom: 15px;"><i class="fas fa-map-marker-alt"></i> BR-364 – Via Verde Shopping loja 09, 2320, Floresta Sul Rio Branco - AC</div>
+                    <div class="footer-contact-item" style="margin-bottom: 8px;"><i class="fas fa-phone-alt"></i> (68) 3227-6933</div>
+                    <div class="footer-contact-item" style="margin-bottom: 8px;"><i class="fab fa-whatsapp"></i> (68) 99208-8000</div>
+                    <div class="footer-contact-item" style="margin-bottom: 8px;"><i class="fas fa-envelope"></i> financeiro@higorpassagens.com.br</div>
                 </div>
                 <div class="footer-column">
-                    <h4>Links Úteis</h4>
+                    <h4>Empresa</h4>
                     <ul>
-                        <li><a href="#home">Início</a></li>
-                        <li><a href="#servicos">Serviços</a></li>
-                        <li><a href="#diferenciais">Diferenciais</a></li>
+                        <li><a href="#sobre">Sobre</a></li>
+                        <li><a href="#ajuda">Ajuda ao viajante</a></li>
                         <li><a href="#contato">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Serviços</h4>
+                    <ul>
+                        <li><a href="#pacotes-nacionais">Pacotes Nacionais</a></li>
+                        <li><a href="#pacotes-internacionais">Pacotes Internacionais</a></li>
+                        <li><a href="#hotel">Hotel</a></li>
+                        <li><a href="#cruzeiros">Cruzeiros</a></li>
+                        <li><a href="#aluguel-carro">Aluguel de Carro</a></li>
+                        <li><a href="#blog">Blog</a></li>
                     </ul>
                 </div>
             </div>
@@ -535,11 +547,20 @@
         const siteMenu = document.getElementById('siteMenu');
 
         if(menuToggle && siteMenu) {
-            menuToggle.addEventListener('click', () => {
+            menuToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
                 const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
                 menuToggle.setAttribute('aria-expanded', !isExpanded);
-                menuToggle.classList.toggle('active');
-                siteMenu.classList.toggle('active');
+                menuToggle.classList.toggle('is-open');
+                siteMenu.classList.toggle('is-open');
+            });
+
+            document.addEventListener('click', (event) => {
+                if (!siteMenu.contains(event.target) && !menuToggle.contains(event.target)) {
+                    menuToggle.classList.remove('is-open');
+                    siteMenu.classList.remove('is-open');
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                }
             });
         }
     </script>
