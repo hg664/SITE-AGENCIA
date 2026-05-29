@@ -13,7 +13,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <link rel="stylesheet" href="style.css?v=4">
+    <link rel="stylesheet" href="style.css?v=6">
 </head>
 <body>
 
@@ -27,7 +27,19 @@
                     <span></span>
                     <span></span>
                 </button>
-                <label class="switch" aria-label="Alternar modo escuro">
+                <a href="https://wa.me/556892088000" target="_blank" class="btn btn-primary" style="padding: 10px 24px; font-size: 0.9rem;">
+                    <i class="fab fa-whatsapp"></i> Fale Conosco
+                </a>
+            </div>
+            <nav class="site-menu" id="siteMenu" aria-label="Menu principal">
+                <a href="#home">Início</a>
+                <a href="#servicos">Serviços</a>
+                <a href="#diferenciais">Diferenciais</a>
+                <a href="#contato">Contato</a>
+                <a href="https://wa.me/556892088000" target="_blank">WhatsApp</a>
+            
+                <div style="padding: 12px 14px;">
+                    <label class="switch" aria-label="Alternar modo escuro">
                     <input id="themeToggle" class="input" type="checkbox">
                     <span class="slider">
                         <span class="sun">
@@ -42,16 +54,7 @@
                         </span>
                     </span>
                 </label>
-                <a href="https://wa.me/556892088000" target="_blank" class="btn btn-primary" style="padding: 10px 24px; font-size: 0.9rem;">
-                    <i class="fab fa-whatsapp"></i> Fale Conosco
-                </a>
-            </div>
-            <nav class="site-menu" id="siteMenu" aria-label="Menu principal">
-                <a href="#home">Início</a>
-                <a href="#servicos">Serviços</a>
-                <a href="#diferenciais">Diferenciais</a>
-                <a href="#contato">Contato</a>
-                <a href="https://wa.me/556892088000" target="_blank">WhatsApp</a>
+                </div>
             </nav>
         </div>
     </header>
@@ -61,7 +64,7 @@
         <div class="hero-bg-slider" id="heroSlider"></div>
         <div class="hero-content">
             <span class="hero-subtitle">Descubra novos horizontes</span>
-            <h1>Sua próxima memória inesquecível começa aqui.</h1>
+            <h1>Sua próxima <span id="revealTextMemory"></span> inesquecível começa aqui.</h1>
             <p>Mais do que viagens, entregamos experiências transformadoras. Realize o sonho da viagem perfeita com segurança e tranquilidade, não importa de qual lugar do Brasil você esteja.</p>
             <a href="https://wa.me/556892088000" target="_blank" class="btn btn-primary">
                 <i class="fab fa-whatsapp"></i> Falar com um especialista
@@ -74,7 +77,14 @@
         <div class="container">
             <div class="section-header js-scroll">
                 <span class="section-subtitle">Nossos Serviços</span>
-                <h2 class="section-title">O que preparamos para você</h2>
+                
+                <div class="animated-underline-container" style="position: relative; display: inline-block; margin-bottom: 40px;">
+                    <h2 class="section-title" style="margin-bottom: 0;">O que preparamos para você</h2>
+                    <svg width="100%" height="20" viewBox="0 0 300 20" class="animated-underline-svg" style="position: absolute; bottom: -15px; left: 0; color: var(--gold, #d4af37);">
+                        <path class="animated-underline-path" d="M 0,10 Q 75,0 150,10 Q 225,20 300,10" pathLength="1" stroke="currentColor" stroke-width="4" fill="none" />
+                    </svg>
+                </div>
+
             </div>
             <div class="services-grid">
                 <div class="service-card js-scroll">
@@ -110,7 +120,7 @@
     </section>
 
     <!-- 3. Por que escolher -->
-    <section class="why-choose" id="diferenciais">
+    <section class="why-choose" id="diferenciais" style="padding-bottom: 30px;">
         <div class="container">
             <div class="contact-container">
                 <div class="contact-content js-scroll">
@@ -146,7 +156,7 @@
     </section>
 
     <!-- 5. Destinos -->
-    <section id="destinos">
+    <section id="destinos" style="padding-top: 10px;">
         <div class="container">
             <div class="featured-video-container js-scroll" style="margin-bottom: 60px;">
                 <iframe src="https://www.youtube.com/embed/Xd2xr7zIFyk?autoplay=1&mute=1&loop=1&playlist=Xd2xr7zIFyk&controls=0&modestbranding=1&rel=0&disablekb=1&fs=0&iv_load_policy=3" title="Travel Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" style="pointer-events: none;"></iframe>
@@ -260,41 +270,9 @@
                 <span class="section-subtitle">Histórias Reais</span>
                 <h2 class="section-title">O que dizem nossos viajantes</h2>
             </div>
-            <div class="testimonials-grid">
-                <div class="testimonial-card js-scroll">
-                    <i class="fas fa-quote-right quote-icon"></i>
-                    <p class="testimonial-text">"Nunca tinha comprado pacote de viagem pela internet, sempre tive receio. Mas a equipe da Higor Viagens me passou tanta confiança! Fizeram tudo por mim e a viagem para o Nordeste foi perfeita."</p>
-                    <div class="client-info">
-                        <img src="https://ui-avatars.com/api/?name=Mariana+Silva&background=004b6b&color=fff&size=100" alt="Mariana" class="client-img">
-                        <div class="client-details">
-                            <h4>Mariana Silva</h4>
-                            <p>Belo Horizonte, MG</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card js-scroll" style="animation-delay: 0.2s;">
-                    <i class="fas fa-quote-right quote-icon"></i>
-                    <p class="testimonial-text">"Nosso cruzeiro foi inesquecível. O suporte que recebemos durante o processo inteiro, até estarmos dentro do navio, foi excepcional. Indico de olhos fechados."</p>
-                    <div class="client-info">
-                        <img src="https://ui-avatars.com/api/?name=Carlos+Eduardo&background=d4af37&color=fff&size=100" alt="Carlos" class="client-img">
-                        <div class="client-details">
-                            <h4>Carlos Eduardo</h4>
-                            <p>Curitiba, PR</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card js-scroll" style="animation-delay: 0.4s;">
-                    <i class="fas fa-quote-right quote-icon"></i>
-                    <p class="testimonial-text">"Mesmo morando em outro estado, parecia que a agência era na minha rua de tanto contato e cuidado que tiveram conosco. A viagem em família para a Disney superou expectativas!"</p>
-                    <div class="client-info">
-                        <img src="https://ui-avatars.com/api/?name=Ana+Paula&background=004b6b&color=fff&size=100" alt="Ana Paula" class="client-img">
-                        <div class="client-details">
-                            <h4>Ana Paula</h4>
-                            <p>Brasília, DF</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!-- Elfsight Google Reviews | Untitled Google Reviews -->
+            <script src="https://elfsightcdn.com/platform.js" async></script>
+            <div class="elfsight-app-df42bc05-507e-42b1-96ae-2ed6fe2631f2" data-elfsight-app-lazy style="margin-bottom: 50px;"></div>
 
             <!-- Imagem do Grupo Real -->
             <div class="real-group-banner js-scroll">
@@ -562,6 +540,47 @@
                     menuToggle.setAttribute('aria-expanded', 'false');
                 }
             });
+        }
+        // Reveal Text Effect for "memória"
+        const revealContainer = document.getElementById('revealTextMemory');
+        if (revealContainer) {
+            const text = "memória";
+            const letterDelay = 0.08;
+            const overlayDelay = 0.05;
+            const springDuration = 600;
+            const letterImages = [
+                "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+                "https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+                "https://images.unsplash.com/photo-1518837695005-2083093ee35b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+                "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+                "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+                "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+                "https://images.unsplash.com/photo-1519904981063-b0cf448d479e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
+            ];
+            
+            revealContainer.classList.add('reveal-text-container');
+            
+            let htmlContent = '';
+            for (let i = 0; i < text.length; i++) {
+                const char = text[i];
+                const img = letterImages[i % letterImages.length];
+                htmlContent += `
+                    <span class="reveal-letter" style="animation-delay: ${i * letterDelay}s">
+                        <span class="base-text">${char}</span>
+                        <span class="image-text" style="background-image: url('${img}')">${char}</span>
+                        <span class="overlay-text" style="animation-delay: ${i * overlayDelay}s">${char}</span>
+                    </span>
+                `;
+            }
+            revealContainer.innerHTML = htmlContent;
+
+            const lastLetterDelay = (text.length - 1) * letterDelay;
+            const totalDelay = (lastLetterDelay * 1000) + springDuration;
+            
+            setTimeout(() => {
+                const overlays = revealContainer.querySelectorAll('.overlay-text');
+                overlays.forEach(overlay => overlay.classList.add('animate-sweep'));
+            }, totalDelay);
         }
     </script>
 </body>

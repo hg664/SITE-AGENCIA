@@ -1493,3 +1493,173 @@
                 height: 250px !important;
             }
         }
+
+        .google-summary-card .google-reviews-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 5px;
+        }
+
+        .google-summary-card .google-reviews-header h4 {
+            font-size: 2.5rem;
+            color: var(--ocean-blue-dark);
+            margin: 0;
+            line-height: 1;
+            font-family: var(--font-heading);
+        }
+
+        .google-summary-card .stars {
+            color: #ffb400;
+            font-size: 1.2rem;
+            display: flex;
+            gap: 3px;
+        }
+
+        .google-summary-card .google-reviews-total {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+        }
+
+        .google-summary-card .rating-bar-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .google-summary-card .rating-bar-label {
+            width: 60px;
+            font-weight: 500;
+        }
+
+        .google-summary-card .rating-bar-track {
+            flex-grow: 1;
+            height: 8px;
+            background: rgba(0,0,0,0.06);
+            border-radius: 4px;
+            margin: 0 15px;
+            overflow: hidden;
+        }
+
+        .google-summary-card .rating-bar-fill {
+            height: 100%;
+            background: #ffb400;
+            border-radius: 4px;
+        }
+
+        .google-summary-card .rating-bar-percent {
+            width: 35px;
+            text-align: right;
+            font-weight: 500;
+        }
+
+        html[data-theme="dark"] .google-summary-card .google-reviews-header h4 {
+            color: #fff;
+        }
+        
+        html[data-theme="dark"] .google-summary-card .rating-bar-track {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        html[data-theme="dark"] .google-summary-card .rating-bar-row {
+            color: rgba(255,255,255,0.7);
+        }
+
+
+/* Reveal Text Effect */
+.reveal-text-container {
+    display: inline-flex;
+    position: relative;
+    cursor: default;
+}
+
+.reveal-letter {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    transform: scale(0);
+    opacity: 0;
+    animation: springIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes springIn {
+    0% { transform: scale(0); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.base-text {
+    position: relative;
+    color: inherit;
+    transition: opacity 0.1s;
+}
+
+.image-text {
+    position: absolute;
+    inset: 0;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 0% center;
+    opacity: 0;
+    transition: opacity 0.1s, background-position 3s ease-in-out;
+}
+
+.reveal-letter:hover .base-text {
+    opacity: 0;
+}
+
+.reveal-letter:hover .image-text {
+    opacity: 1;
+    background-position: 10% center;
+}
+
+.overlay-text {
+    position: absolute;
+    inset: 0;
+    color: #ef4444; /* text-red-500 */
+    pointer-events: none;
+    opacity: 0;
+}
+
+.overlay-text.animate-sweep {
+    animation: sweepOpacity 0.4s ease-in-out forwards;
+}
+
+@keyframes sweepOpacity {
+    0% { opacity: 0; }
+    10% { opacity: 1; }
+    70% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+
+/* Animated Underline Effect */
+.animated-underline-container {
+    cursor: pointer;
+    transition: transform 0.6s ease;
+}
+
+.animated-underline-container:hover {
+    transform: scale(1.02);
+}
+
+.animated-underline-path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: drawPath 1.5s ease-in-out forwards;
+    /* transition for hover */
+    transition: d 0.8s ease, stroke-width 0.3s ease;
+}
+
+@keyframes drawPath {
+    to { stroke-dashoffset: 0; }
+}
+
+.animated-underline-container:hover .animated-underline-path {
+    d: path('M 0,10 Q 75,20 150,10 Q 225,0 300,10');
+}
