@@ -9,11 +9,13 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css?v=6">
+    <link rel="stylesheet" href="elegant-carousel.css">
 </head>
 <body>
 
@@ -156,7 +158,7 @@
     </section>
 
     <!-- 5. Destinos -->
-    <section id="destinos" style="padding-top: 10px;">
+    <section id="destinos" class="dark-section" style="padding-top: 60px; padding-bottom: 60px;">
         <div class="container">
             <div class="featured-video-container js-scroll" style="margin-bottom: 60px;">
                 <iframe src="https://www.youtube.com/embed/Xd2xr7zIFyk?autoplay=1&mute=1&loop=1&playlist=Xd2xr7zIFyk&controls=0&modestbranding=1&rel=0&disablekb=1&fs=0&iv_load_policy=3" title="Travel Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" style="pointer-events: none;"></iframe>
@@ -165,48 +167,62 @@
                 <span class="section-subtitle">Inspirações</span>
                 <h2 class="section-title">Destinos em Destaque</h2>
             </div>
-            <div class="destinations-grid">
-                <div class="destination-card js-scroll">
-                    <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Dubai">
-                    <div class="destination-overlay">
-                        <h3>Dubai</h3>
-                        <a href="https://wa.me/556892088000" target="_blank" class="destination-btn">Ver pacotes <i class="fas fa-arrow-right"></i></a>
+            <div id="elegantCarousel" class="carousel-wrapper" style="margin-bottom: 40px;">
+                <div class="carousel-bg-wash"></div>
+                <div class="carousel-inner">
+                    <div class="carousel-content">
+                        <div class="carousel-content-inner">
+                            <div class="carousel-collection-num">
+                                <span class="carousel-num-line"></span>
+                                <span class="carousel-num-text"></span>
+                            </div>
+                            <h2 class="carousel-title"></h2>
+                            <p class="carousel-subtitle"></p>
+                            <p class="carousel-description"></p>
+                            <div class="carousel-nav-arrows">
+                                <button class="carousel-arrow-btn btn-prev" aria-label="Previous slide">
+                                    <i class="fas fa-arrow-left"></i>
+                                </button>
+                                <button class="carousel-arrow-btn btn-next" aria-label="Next slide">
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-image-container">
+                        <div class="carousel-image-frame">
+                            <img src="" alt="" class="carousel-image">
+                            <div class="carousel-image-overlay"></div>
+                        </div>
+                        <div class="carousel-frame-corner carousel-frame-corner--tl"></div>
+                        <div class="carousel-frame-corner carousel-frame-corner--br"></div>
                     </div>
                 </div>
-                <div class="destination-card js-scroll" style="animation-delay: 0.1s;">
-                    <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Paris">
-                    <div class="destination-overlay">
-                        <h3>Paris</h3>
-                        <a href="https://wa.me/556892088000" target="_blank" class="destination-btn">Ver pacotes <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-                <div class="destination-card js-scroll" style="animation-delay: 0.2s;">
-                    <img src="https://images.unsplash.com/photo-1544644181-1484b3fdfc62?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Maldivas">
-                    <div class="destination-overlay">
-                        <h3>Maldivas</h3>
-                        <a href="https://wa.me/556892088000" target="_blank" class="destination-btn">Ver pacotes <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-                <div class="destination-card js-scroll" style="animation-delay: 0.3s;">
-                    <img src="https://images.unsplash.com/photo-1483729558449-99ef09a8c325?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Rio de Janeiro">
-                    <div class="destination-overlay">
-                        <h3>Rio de Janeiro</h3>
-                        <a href="https://wa.me/556892088000" target="_blank" class="destination-btn">Ver pacotes <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-                <div class="destination-card js-scroll" style="animation-delay: 0.4s;">
-                    <img src="https://images.unsplash.com/photo-1533050487297-09b450131914?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Grécia">
-                    <div class="destination-overlay">
-                        <h3>Grécia</h3>
-                        <a href="https://wa.me/556892088000" target="_blank" class="destination-btn">Ver pacotes <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-                <div class="destination-card js-scroll" style="animation-delay: 0.5s;">
-                    <img src="https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Maceió">
-                    <div class="destination-overlay">
-                        <h3>Maceió</h3>
-                        <a href="https://wa.me/556892088000" target="_blank" class="destination-btn">Ver pacotes <i class="fas fa-arrow-right"></i></a>
-                    </div>
+                <div class="carousel-progress-bar">
+                    <button class="carousel-progress-item active" aria-label="Go to slide 1">
+                        <div class="carousel-progress-track"><div class="carousel-progress-fill"></div></div>
+                        <span class="carousel-progress-label">Dubai</span>
+                    </button>
+                    <button class="carousel-progress-item" aria-label="Go to slide 2">
+                        <div class="carousel-progress-track"><div class="carousel-progress-fill"></div></div>
+                        <span class="carousel-progress-label">Paris</span>
+                    </button>
+                    <button class="carousel-progress-item" aria-label="Go to slide 3">
+                        <div class="carousel-progress-track"><div class="carousel-progress-fill"></div></div>
+                        <span class="carousel-progress-label">Maldivas</span>
+                    </button>
+                    <button class="carousel-progress-item" aria-label="Go to slide 4">
+                        <div class="carousel-progress-track"><div class="carousel-progress-fill"></div></div>
+                        <span class="carousel-progress-label">Grécia</span>
+                    </button>
+                    <button class="carousel-progress-item" aria-label="Go to slide 5">
+                        <div class="carousel-progress-track"><div class="carousel-progress-fill"></div></div>
+                        <span class="carousel-progress-label">Rio de Janeiro</span>
+                    </button>
+                    <button class="carousel-progress-item" aria-label="Go to slide 6">
+                        <div class="carousel-progress-track"><div class="carousel-progress-fill"></div></div>
+                        <span class="carousel-progress-label">Maceió</span>
+                    </button>
                 </div>
             </div>
 
@@ -266,10 +282,7 @@
     <!-- 4. Depoimentos -->
     <section class="testimonials" id="depoimentos">
         <div class="container">
-            <div class="section-header js-scroll">
-                <span class="section-subtitle">Histórias Reais</span>
-                <h2 class="section-title">O que dizem nossos viajantes</h2>
-            </div>
+
             <!-- Elfsight Google Reviews | Untitled Google Reviews -->
             <script src="https://elfsightcdn.com/platform.js" async></script>
             <div class="elfsight-app-df42bc05-507e-42b1-96ae-2ed6fe2631f2" data-elfsight-app-lazy style="margin-bottom: 50px;"></div>
@@ -583,5 +596,6 @@
             }, totalDelay);
         }
     </script>
+    <script src="elegant-carousel.js"></script>
 </body>
 </html>

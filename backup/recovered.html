@@ -1,0 +1,59 @@
+Created At: 2026-05-28T20:42:36Z
+Completed At: 2026-05-28T20:42:36Z
+File Path: `file:///c:/Users/jorge/OneDrive/Documentos/SITE%20EMPRESA%20AGENCIA/SITE-AGENCIA/index.html`
+Total Lines: 1405
+Total Bytes: 54557
+Showing lines 1210 to 1260
+The following code has been modified to include a line number before every line, in the format: <line_number>: <original_line>. Please note that any changes targeting the original code should remove the line number, colon, and leading space.
+1210:                         <div class="footer-contact-item">
+1211:                             <i class="fas fa-phone-alt"></i>
+1212:                             <span>(68) 3227-6933</span>
+1213:                         </div>
+1214:                         <div class="footer-contact-item">
+1215:                             <i class="fab fa-whatsapp"></i>
+1216:                             <span>(68) 99208-8000</span>
+1217:                         </div>
+1218:                         <div class="footer-contact-item">
+1219:                             <i class="fas fa-envelope"></i>
+1220:                             <span>financeiro@higorpassagens.com.br</span>
+1221:                         </div>
+1222:                     </div>
+1223:                 </div>
+1224:                 
+1225:                 <div class="footer-column">
+1226:                     <h4>Empresa</h4>
+1227:                     <ul>
+1228:                         <li><a href="#">Sobre</a></li>
+1229:                         <li><a href="#">Ajuda ao viajante</a></li>
+1230:                         <li><a href="#">Consultores</a></li>
+1231:                     </ul>
+1232:                 </div>
+1233:             </div>
+1234:             
+1235:             <div class="footer-bottom">
+1236:                 <p>&copy; 2024 Higor Viagens. Todos os direitos reservados.</p>
+1237:             </div>
+1238:         </div>
+1239:     </footer>
+1240: 
+1241:     <!-- JavaScript -->
+1242:     <script>
+1243:         // Theme Toggle
+1244:         const themeToggle = document.getElementById('themeToggle');
+1245:         const savedTheme = localStorage.getItem('higor-theme');
+1246:         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+1247:         const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+1248: 
+1249:         document.documentElement.dataset.theme = initialTheme;
+1250:         if (themeToggle) {
+1251:             themeToggle.checked = initialTheme === 'dark';
+1252:             themeToggle.addEventListener('change', () => {
+1253:                 const nextTheme = themeToggle.checked ? 'dark' : 'light';
+1254:                 document.documentElement.dataset.theme = nextTheme;
+1255:                 localStorage.setItem('higor-theme', nextTheme);
+1256:             });
+1257:         }
+1258: 
+1259:         // Header Menu
+1260:         const menuToggle = document.getElementById('menuToggle');
+The above content does NOT show the entire file contents. If you need to view any lines of the file which were not shown to complete your task, call this tool again to view those lines.
