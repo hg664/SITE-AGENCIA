@@ -4,42 +4,42 @@ const elegantSlides = [
         subtitle: 'Destino dos Sonhos',
         description: 'Explore o luxo incomparável e arquitetura futurista da jóia dos Emirados Árabes Unidos.',
         accent: '#C4956A',
-        imageUrl: 'public/Dubai-hero.jpg',
+        imageUrl: 'public/dubai-hero.jpg',
     },
     {
         title: 'Paris',
         subtitle: 'Cidade Luz',
         description: 'Perca-se nas ruas românticas e viva o charme atemporal da capital francesa.',
         accent: '#D4AF37',
-        imageUrl: 'public/Paris-hero.jpg',
+        imageUrl: 'public/paris-hero.jpg',
     },
     {
         title: 'Maldivas',
         subtitle: 'Paraíso Tropical',
         description: 'Bangalôs luxuosos sobre águas cristalinas do Oceano Índico.',
         accent: '#2A9D8F',
-        imageUrl: 'public/Maldivas-hero.jpg',
+        imageUrl: 'public/maldivas-hero.jpg',
     },
     {
         title: 'Grécia',
         subtitle: 'Berço da Civilização',
         description: 'Explore ruínas milenares, ilhas de águas cristalinas e a rica história de Atenas e Santorini.',
         accent: '#2980b9',
-        imageUrl: 'public/Grecia-hero.jpg',
+        imageUrl: 'public/grecia-hero.jpg',
     },
     {
         title: 'Rio de Janeiro',
         subtitle: 'Cidade Maravilhosa',
         description: 'A energia contagiante do povo carioca emoldurada pelo Cristo Redentor e praias icônicas.',
         accent: '#2ecc71',
-        imageUrl: 'public/Rio-hero.jpg',
+        imageUrl: 'public/rio-hero.jpg',
     },
     {
         title: 'Maceió',
         subtitle: 'Caribe Brasileiro',
         description: 'Piscinas naturais, praias de areia branca e coqueirais a perder de vista.',
         accent: '#3498db',
-        imageUrl: 'public/Maceio-hero.jpg',
+        imageUrl: 'public/maceio-hero.jpg',
     }
 ];
 
@@ -60,12 +60,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Gerar camadas de background para fade suave
     const bgContainer = document.createElement('div');
     bgContainer.className = 'carousel-bg-layers';
-    bgContainer.style.position = 'absolute';
-    bgContainer.style.top = '0';
-    bgContainer.style.left = '0';
-    bgContainer.style.width = '100%';
-    bgContainer.style.height = '100%';
-    bgContainer.style.zIndex = '0';
+    bgContainer.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;';
+    carouselWrapper.style.position = 'relative';
+    carouselWrapper.style.overflow = 'hidden';
     carouselWrapper.prepend(bgContainer);
 
     const bgLayers = elegantSlides.map(slide => {
@@ -128,19 +125,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Immersive layout logic for all slides
         carouselWrapper.classList.add('slide-immersive');
-        
+
+        // Fade background layers
         bgLayers.forEach((layer, i) => {
-            if (i === index) {
-                layer.style.opacity = '1';
-                layer.style.zIndex = '1';
-            } else {
-                layer.style.opacity = '0';
-                layer.style.zIndex = '0';
-            }
+            layer.style.opacity = (i === index) ? '1' : '0';
+            layer.style.zIndex = (i === index) ? '1' : '0';
         });
 
+        // Garantir que o conteúdo textual fique acima das camadas de fundo
+        const innerEl = carouselWrapper.querySelector('.carousel-inner');
+        if (innerEl) innerEl.style.zIndex = '10';
+        const progressBar = carouselWrapper.querySelector('.carousel-progress-bar');
+        if (progressBar) progressBar.style.zIndex = '10';
+
         document.querySelector('.carousel-image-container').style.display = 'none';
-        els.bgWash.style.display = 'none'; // Remove the greenish radial blur
+        els.bgWash.style.display = 'none';
         document.querySelector('.carousel-content').classList.add('slide-overlay-immersive');
         document.querySelector('.carousel-content-inner').classList.add('text-content-overlay');
     }
