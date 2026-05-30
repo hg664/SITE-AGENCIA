@@ -54,8 +54,37 @@ document.addEventListener('DOMContentLoaded', () => {
     let intervalId = null;
     let progressId = null;
 
-    const SLIDE_DURATION = 6000;
-    const TRANSITION_DURATION = 800;
+    const SLIDE_DURATION = 5000; // ms
+    const TRANSITION_DURATION = 800; // ms
+
+    // Gerar camadas de background para fade suave
+    const bgContainer = document.createElement('div');
+    bgContainer.className = 'carousel-bg-layers';
+    bgContainer.style.position = 'absolute';
+    bgContainer.style.top = '0';
+    bgContainer.style.left = '0';
+    bgContainer.style.width = '100%';
+    bgContainer.style.height = '100%';
+    bgContainer.style.zIndex = '0';
+    carouselWrapper.prepend(bgContainer);
+
+    const bgLayers = elegantSlides.map(slide => {
+        const layer = document.createElement('div');
+        layer.className = 'carousel-bg-layer';
+        layer.style.position = 'absolute';
+        layer.style.top = '0';
+        layer.style.left = '0';
+        layer.style.width = '100%';
+        layer.style.height = '100%';
+        layer.style.backgroundSize = 'cover';
+        layer.style.backgroundPosition = 'center';
+        layer.style.backgroundImage = `url('${slide.imageUrl}')`;
+        layer.style.opacity = '0';
+        layer.style.zIndex = '0';
+        layer.style.transition = 'opacity 0.8s ease-in-out';
+        bgContainer.appendChild(layer);
+        return layer;
+    });
 
     const els = {
         bgWash: carouselWrapper.querySelector('.carousel-bg-wash'),
@@ -99,7 +128,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Immersive layout logic for all slides
         carouselWrapper.classList.add('slide-immersive');
-        carouselWrapper.style.backgroundImage = `url('${slide.imageUrl}')`;
+        
+        bgLayers.forEach((layer, i) => {
+            if (i === index) {
+                layer.style.opacity = '1';
+                layer.style.zIndex = '1';
+            } else {
+                layer.style.opacity = '0';
+                layer.style.zIndex = '0';
+            }
+        });
+
         document.querySelector('.carousel-image-container').style.display = 'none';
         els.bgWash.style.display = 'none'; // Remove the greenish radial blur
         document.querySelector('.carousel-content').classList.add('slide-overlay-immersive');
