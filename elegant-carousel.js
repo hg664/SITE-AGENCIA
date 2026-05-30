@@ -4,42 +4,42 @@ const elegantSlides = [
         subtitle: 'Destino dos Sonhos',
         description: 'Explore o luxo incomparável e arquitetura futurista da jóia dos Emirados Árabes Unidos.',
         accent: '#C4956A',
-        imageUrl: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+        imageUrl: 'public/Dubai-hero.jpg',
     },
     {
         title: 'Paris',
-        subtitle: 'A Cidade Luz',
-        description: 'Romantismo, cultura e gastronomia no coração da Europa.',
-        accent: '#8BA7B8',
-        imageUrl: 'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+        subtitle: 'Cidade Luz',
+        description: 'Perca-se nas ruas românticas e viva o charme atemporal da capital francesa.',
+        accent: '#D4AF37',
+        imageUrl: 'public/Paris-hero.jpg',
     },
     {
         title: 'Maldivas',
         subtitle: 'Paraíso Tropical',
         description: 'Bangalôs luxuosos sobre águas cristalinas do Oceano Índico.',
-        accent: '#7A9E7E',
-        imageUrl: 'https://images.unsplash.com/photo-1544644181-1484b3fdfc62?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+        accent: '#2A9D8F',
+        imageUrl: 'public/Maldivas-hero.jpg',
     },
     {
         title: 'Grécia',
-        subtitle: 'Magia Mediterrânea',
-        description: 'História milenar, pôr do sol inesquecível e mar azul-turquesa.',
-        accent: '#D4A955',
-        imageUrl: 'https://images.unsplash.com/photo-1533050487297-09b450131914?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+        subtitle: 'Berço da Civilização',
+        description: 'Explore ruínas milenares, ilhas de águas cristalinas e a rica história de Atenas e Santorini.',
+        accent: '#2980b9',
+        imageUrl: 'public/Grecia-hero.jpg',
     },
     {
         title: 'Rio de Janeiro',
         subtitle: 'Cidade Maravilhosa',
-        description: 'Belezas naturais estonteantes, praias icônicas e a alegria contagiante do povo carioca.',
-        accent: '#4A8E5E',
-        imageUrl: 'https://images.unsplash.com/photo-1483729558449-99ef09a8c325?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+        description: 'A energia contagiante do povo carioca emoldurada pelo Cristo Redentor e praias icônicas.',
+        accent: '#2ecc71',
+        imageUrl: 'public/Rio-hero.jpg',
     },
     {
         title: 'Maceió',
         subtitle: 'Caribe Brasileiro',
-        description: 'Piscinas naturais de águas quentes e praias de tirar o fôlego no Nordeste brasileiro.',
-        accent: '#5E9EA0',
-        imageUrl: 'https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+        description: 'Piscinas naturais, praias de areia branca e coqueirais a perder de vista.',
+        accent: '#3498db',
+        imageUrl: 'public/Maceio-hero.jpg',
     }
 ];
 
@@ -96,6 +96,14 @@ document.addEventListener('DOMContentLoaded', () => {
             else if (i > index) fill.style.width = '0%';
             fill.style.backgroundColor = (i === index) ? slide.accent : '';
         });
+
+        // Immersive layout logic for all slides
+        carouselWrapper.classList.add('slide-immersive');
+        carouselWrapper.style.backgroundImage = `url('${slide.imageUrl}')`;
+        document.querySelector('.carousel-image-container').style.display = 'none';
+        els.bgWash.style.display = 'none'; // Remove the greenish radial blur
+        document.querySelector('.carousel-content').classList.add('slide-overlay-immersive');
+        document.querySelector('.carousel-content-inner').classList.add('text-content-overlay');
     }
 
     function goToSlide(index) {
