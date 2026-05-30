@@ -4,42 +4,42 @@ const elegantSlides = [
         subtitle: 'Destino dos Sonhos',
         description: 'Explore o luxo incomparável e arquitetura futurista da jóia dos Emirados Árabes Unidos.',
         accent: '#C4956A',
-        imageUrl: '/dubai-hero.jpg',
+        imageUrl: 'public/dubai-hero.jpg',
     },
     {
         title: 'Paris',
         subtitle: 'Cidade Luz',
         description: 'Perca-se nas ruas românticas e viva o charme atemporal da capital francesa.',
         accent: '#D4AF37',
-        imageUrl: '/paris-hero.jpg',
+        imageUrl: 'public/paris-hero.jpg',
     },
     {
         title: 'Maldivas',
         subtitle: 'Paraíso Tropical',
         description: 'Bangalôs luxuosos sobre águas cristalinas do Oceano Índico.',
         accent: '#2A9D8F',
-        imageUrl: '/maldivas-hero.jpg',
+        imageUrl: 'public/maldivas-hero.jpg',
     },
     {
         title: 'Grécia',
         subtitle: 'Berço da Civilização',
         description: 'Explore ruínas milenares, ilhas de águas cristalinas e a rica história de Atenas e Santorini.',
         accent: '#2980b9',
-        imageUrl: '/grecia-hero.jpg',
+        imageUrl: 'public/grecia-hero.jpg',
     },
     {
         title: 'Rio de Janeiro',
         subtitle: 'Cidade Maravilhosa',
         description: 'A energia contagiante do povo carioca emoldurada pelo Cristo Redentor e praias icônicas.',
         accent: '#2ecc71',
-        imageUrl: '/rio-hero.jpg',
+        imageUrl: 'public/rio-hero.jpg',
     },
     {
         title: 'Maceió',
         subtitle: 'Caribe Brasileiro',
         description: 'Piscinas naturais, praias de areia branca e coqueirais a perder de vista.',
         accent: '#3498db',
-        imageUrl: '/maceio-hero.jpg',
+        imageUrl: 'public/maceio-hero.jpg',
     }
 ];
 
